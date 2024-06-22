@@ -16,7 +16,14 @@ def event(request):
 	return render(request,'event.html')
 
 def contact(request):
-	return render(request,'contact.html')
+	'''
+		Sign Up Page
+	'''
+	if request.session.has_key('id'):
+		# Redirect if Already Login
+		return redirect("/")
+	else:
+		return render(request,'contact.html')
 
 def about(request):
 	return render(request,'about.html')
