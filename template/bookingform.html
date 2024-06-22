@@ -147,15 +147,6 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- //header -->
 
 
-
-
-
-
-
-
-
-
-
 <div class="featured-news">
 	 <div class="container">
 		 <div class="ftrd-head text-center">
@@ -167,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			 	{% for x in turfdetails %}
 
 
-		 			 <div class="col-md-4 event-grid-sec">
+		 			 <div class="col-md-6 event-grid-sec">
 				 <div class="event-time text-center">
 					 <p>{{x.id}}. {{x.tname}}</p>
 				 </div>
@@ -179,25 +170,21 @@ document.addEventListener('DOMContentLoaded', function() {
 					 <p>{{x.mobile}}</p>
 					 <p>{{x.facility}}</p>
 					 <p>{{x.specification}}</p>
-					 <p>Rs.{{x.price}}</p>
+					 <p>Rs.<span id="turf_price" value="{{x.price}}">{{x.price}}</span></p>
 					 
 				<form action="/booking/" method="POST">
 			 	{% csrf_token %}
-			 			<input type="hidden" value="{{x.id}}" name="turfid">
-			 			<label>Time From</label>
-						<input type="time" name="timefrom" required/>
-						<label>Time To</label>
-						<input type="time" name="timeto" required/><br><br>
-						<label for="timeslot">Time Slot: </label>
-						<input type="range" min="18" max="24" onchange="updatePrice(this.value)">
-						<!-- <select name="timeslot">
-							<option value="1">18:00 - 19:00</option>
-							<option value="2">19:00 - 20:00</option>
-							<option value="3">20:00 - 21:00</option>
-							<option value="4">21:00 - 22:00</option>
-							<option value="5">22:00 - 23:00</option>
-							<option value="6">23:00 - 00:00</option>
-						</select><br><br> -->
+			 			<input type="hidden" value="{{x.id}}" id="turfid" name="turfid">
+						 <label for="timefrom">Start Time:</label>
+						 <input type="range" id="timefrom" name="timefrom" min="0" max="23" value="0" oninput="updatePrice()">
+						 <span id="selected-timefrom">0</span>:00<br>
+				 
+						 <label for="timeto">End Time:</label>
+						 <input type="range" id="timeto" name="timeto" min="1" max="24" value="1" oninput="updatePrice()">
+						 <span id="selected-timeto">1</span>:00<br>
+				 
+						 <p>Total Hours: <span id="total-hours">1</span></p>
+						 <p>Price: <span id="price"></span></p>
 						<label>Date</label>
 						<input type="date" name="date" placeholder="Date" required=" "/><br><br>
 						<button type="submit" class="btn btn-info">Submit</button>
