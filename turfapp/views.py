@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from turfapp.models import *
 
 # Create your views here.
@@ -6,9 +6,11 @@ from turfapp.models import *
 def index(request):
 	return render(request,'index.html')
 
-
 def gallery(request):
 	return render(request,'gallery.html')
+
+def test(request):
+	return render(request,'test.html')
 
 def event(request):
 	return render(request,'event.html')
@@ -28,7 +30,7 @@ def adminlogin(request):
 		if check:
 			for x in check:
 				request.session['id']=x.id
-				return render(request,'adminindex.html')
+				return redirect('/adminindex')
 		else:
 			return render(request,'adminlogin.html')
 
@@ -62,7 +64,7 @@ def login(request):
 		if check:
 			for x in check:
 				request.session['id']=x.id
-				return render(request,'index.html')
+				return redirect('/turf')
 		else:
 			return render(request,'login.html')
 
@@ -86,7 +88,7 @@ def register(request):
 		password=request.POST['password']
 		query=user_tb(name=name,address=address,email=email,contact=phone,password=password)
 		query.save()
-		return render(request,'contact.html')
+		return redirect("/login")
 	else:
 		return render(request,'contact.html')
 
@@ -135,7 +137,7 @@ def booking(request):
 			booking_details=booking_tb.objects.all().filter(userid=uid)
 			return render(request,'turf.html',{'turfdetails':turfdetails,'booking_details':booking_details})
 	else:
-		return render(request,'login.html')
+		return redirect('/login')
 
 
 def adminviewbooking(request):
