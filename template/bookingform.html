@@ -26,12 +26,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<script type="text/javascript" src="/static/js/jquery.min.js"></script>
 	<!-- js -->
 </head>
+<script>
+	function updatePrice(time) {
+		console.log("Changed");
+	}
+</script>
 <body>
 <!-- header -->
 <div class="header">
 	 <div class="container">
 		 <div class="logo">
-			   <h1><a href="index.html">TURF BOOKING</a></h1>
+			   <h1><a href="/">TURF BOOKING</a></h1>
 		 </div>	
 		 <div class="top-menu">
 			 <span class="menu"></span>
@@ -41,10 +46,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				 <!-- <li><a href="/error/">TRAINING</a></li> -->
 			
 				 
-				 <li><a href="/contact/">SIGN IN</a></li>
 				 {% if request.session.id %}
-				 <li><a href="/logout/">LOGOUT</a></li>
-				 {% else %}
+				  <li><a href="/logout/">LOGOUT</a></li>
+				  {% else %}
+				  <li><a href="/contact/">SIGN UP</a></li>
 				 <li><a href="/login/">LOGIN</a></li>
 				 {% endif %}
 			 </ul>			 
@@ -84,7 +89,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- //header -->
 <div class="container">
 		 <ol class="breadcrumb">
-		  <li><a href="/index/">Home</a></li>
+		  <li><a href="/">Home</a></li>
 		  <li class="active">Booking</li>
 		 </ol>
 </div>
@@ -113,7 +118,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 		 			 <div class="col-md-4 event-grid-sec">
 				 <div class="event-time text-center">
-					 <p>0{{x.tname}}</p>
+					 <p>{{x.id}}. {{x.tname}}</p>
 				 </div>
 				 <div class="event-grid_pic">
 					 <img src="{{x.image.url}}" alt=""/>
@@ -129,9 +134,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			 	{% csrf_token %}
 			 			<input type="hidden" value="{{x.id}}" name="turfid">
 			 			<label>Time From</label>
-						<input type="time" name="timefrom" placeholder="Time From" required=" "/>
+						<input type="time" name="timefrom" required/>
 						<label>Time To</label>
-						<input type="time" name="timeto" placeholder="Time To" required=" "/><br><br>
+						<input type="time" name="timeto" required/><br><br>
+						<label for="timeslot">Time Slot: </label>
+						<input type="range" min="18" max="24" onchange="updatePrice(this.value)">
+						<!-- <select name="timeslot">
+							<option value="1">18:00 - 19:00</option>
+							<option value="2">19:00 - 20:00</option>
+							<option value="3">20:00 - 21:00</option>
+							<option value="4">21:00 - 22:00</option>
+							<option value="5">22:00 - 23:00</option>
+							<option value="6">23:00 - 00:00</option>
+						</select><br><br> -->
 						<label>Date</label>
 						<input type="date" name="date" placeholder="Date" required=" "/><br><br>
 						<button type="submit" class="btn btn-info">Submit</button>
@@ -158,7 +173,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="footer">
 	 <div class="container">
 		 <div class="copywrite">
-			 <p>© 2015 All Rights Reseverd Design by <a href="http://w3layouts.com/">W3layouts</a> </p>
+			 <p>&copy; 2024 Turf Booking System. All Rights 
+Reserved</p>
 		 </div>
 		 <div class="footer-menu">
 			 <ul>
@@ -167,10 +183,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				 <!-- <li><a href="index.html">TRAINING</a></li> -->
 				 
 				 <li><a href="/turf/">TURF</a></li>
-				 <li><a href="/CONTACT/">SIGN IN</a></li>
 				 {% if request.session.id %}
 				 <li><a href="/logout/">LOGOUT</a></li>
 				 {% else %}
+				 <li><a href="/CONTACT/">SIGN UP</a></li>
 				 <li><a href="/login/">LOGIN</a></li>
 				 {% endif %}
 			 </ul>
