@@ -186,8 +186,20 @@ document.addEventListener('DOMContentLoaded', function() {
 						 <p>Total Hours: <span id="total-hours">1</span></p>
 						 <p>Price: <span id="price"></span></p>
 						<label>Date</label>
-						<input type="date" name="date" placeholder="Date" required=" "/><br><br>
-						<button type="submit" class="btn btn-info">Submit</button>
+						<input type="date" name="date" id="date" placeholder="Date" required onchange="checkBooking()"/><br>
+						<p>Booking Status: <span id="status"></span></p><br>
+						<img hidden="true" id="payment-qr">
+						<br>
+						<div hidden="'true" id="paydiv">
+							<!-- TODO: Payment id upload Database -->
+							<label for='payment-id'>Payment Id(Optional): </label>
+							<input name="payment-id" id="payment-id">
+						</div>
+						<br>
+						<br>
+
+
+						<button id="submit-button" disabled="true" type="submit" class="btn btn-info">Submit</button>
 						<!-- <input type="submit" value="SEND"> -->
 			 	</form>
 				 </div>
