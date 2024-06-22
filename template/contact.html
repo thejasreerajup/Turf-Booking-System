@@ -31,7 +31,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="header">
 	 <div class="container">
 		 <div class="logo">
-			   <h1><a href="index.html">TURF BOOKING</a></h1>
+			   <h1><a href="/">TURF BOOKING</a></h1>
 		 </div>	
 		 <div class="top-menu">
 			 <span class="menu"></span>
@@ -42,10 +42,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				 <!-- <li><a href="/error/">TRAINING</a></li> -->
 				  <li><a href="/turf/">TURF</a></li>
 				
-				 <li class="active"><a href="/contact/">SIGN IN</a></li>
-				 {% if request.session.id %}
-				 <li><a href="/logout/">LOGOUT</a></li>
-				 {% else %}
+				  {% if request.session.id %}
+				  <li><a href="/logout/">LOGOUT</a></li>
+				  {% else %}
+				  <li class="active"><a href="/contact/">SIGN UP</a></li>
 				 <li><a href="/login/">LOGIN</a></li>
 				 {% endif %}
 			 </ul>			 
@@ -73,14 +73,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="container">
 		 <ol class="breadcrumb">
 		  <li><a href="/">Home</a></li>
-		  <li class="active">SIGN IN</li>
+		  <li class="active">SIGN UP</li>
 		 </ol>
 </div>
 <!-- //header -->
 <div class="contact">
 	 <div class="container">
 		 <div class="contact-grids">
-			 <h2>SIGN IN</h2>
+			 <h2>SIGN UP</h2>
 			 <p class="design">Design is not the narrow application of formal skills, it is a way of thinking.</p>
 			 
 			 <div class="contact-icons">
@@ -161,7 +161,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="footer">
 	 <div class="container">
 		 <div class="copywrite">
-			 <p>© 2015 All Rights Reseverd Design by <a href="http://w3layouts.com/">W3layouts</a> </p>
+			 <p>&copy; 2024 Turf Booking System. All Rights 
+Reserved</p>
 		 </div>
 		 <div class="footer-menu">
 			 <ul>
@@ -171,10 +172,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				 <!-- <li><a href="index.html">TRAINING</a></li> -->
 				 
 				 <li><a href="/turf/">TURF</a></li>
-				 <li><a href="/contact/">SIGN IN</a></li>
 				 {% if request.session.id %}
 				 <li><a href="/logout/">LOGOUT</a></li>
 				 {% else %}
+				 <li><a href="/contact/">SIGN UP</a></li>
 				 <li><a href="/login/">LOGIN</a></li>
 				 {% endif %}
 			 </ul>
