@@ -27,8 +27,35 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- js -->
 </head>
 <script>
-	function updatePrice(time) {
-		console.log("Changed");
+	// Function to check booking availability
+	function checkBooking() {
+		const turfid = document.getElementById('turfid').value;
+		const date = document.getElementById('date').value;
+		const timefrom = parseInt(document.getElementById('timefrom').value);
+		const timeto = parseInt(document.getElementById('timeto').value);
+		const qrCode = document.getElementById('payment-qr');
+		const payid = document.getElementById('paydiv');
+		const submitButton = document.getElementById('submit-button');
+	
+		if (!date) return; // Do nothing if date is not selected
+	
+		fetch(`/check_booking/?turfid=${turfid}&date=${date}&timefrom=${timefrom}&timeto=${timeto}`)
+			.then(response => response.json())
+			.then(data => {
+				if (data.available) {
+					qrCode.hidden = false;
+					payid.hidden = false;
+					qrCode.src = "/static/images/payment_qr.png"
+					submitButton.disabled = false;
+					document.getElementById('status').innerText = "The selected time slot is Available.";
+				} else {
+					qrcode.getAttribute('src') = ""
+					qrCode.hidden = true;
+					payid.hidden = true;
+					submitButton.disabled = true;
+					document.getElementById('status').innerText = "The selected time slot is Already Booked.";
+				}
+			});
 	}
 </script>
 <body>
