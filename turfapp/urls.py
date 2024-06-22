@@ -26,6 +26,7 @@ path('adminviewbooking/',views.adminviewbooking),
 path('register/',views.register),
 path('logout/',views.logout),
 path('booking/',views.booking),
+path('check_booking/',views.check_booking),
 path('adminlogout/',views.adminlogout),
 path('approved_booking/',views.approved_booking),
 
