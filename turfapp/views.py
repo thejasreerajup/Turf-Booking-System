@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse, JsonResponse
 from turfapp.models import *
+import qrcode
 
 # Create your views here.
 
@@ -129,7 +131,24 @@ def turf(request):
 def turf_details(request):
 	tid=request.GET['tid']
 	turfdetails=turf_tb.objects.all().filter(id=tid)
+	qrcode.make(turfdetails[0].mobile + '@upi').save('static/images/payment_qr.png')
 	return render(request,'bookingform.html',{'turfdetails':turfdetails})
+
+def check_booking(request):
+	tid=int(request.GET['turfid'])
+	date = request.GET.get('date')
+	timefrom = int(request.GET.get('timefrom'))
+	timeto = int(request.GET.get('timeto'))
+
+	bookings = booking_tb.objects.filter(
+		turfid=tid,
+		date=date,
+		timefrom=timefrom,
+		timeto=timeto
+	)
+
+	is_available = not bookings.exists()
+	return JsonResponse({'available': is_available, 'id':tid, 'date':date})
 
 def booking(request):
 	if request.session.has_key('id'):
