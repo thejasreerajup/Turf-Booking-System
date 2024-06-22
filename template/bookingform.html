@@ -1,0 +1,183 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Soccer a Sports Category Flat Bootstrap Responsive Website Template | Contact :: w3layouts</title>
+	<!--fonts-->
+		<link href='http://fonts.googleapis.com/css?family=Francois+One' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Cabin:400,500,600,700' rel='stylesheet' type='text/css'>	
+ <link href='http://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet' type='text/css'>		
+	<!--//fonts-->
+		<link href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<!-- for-mobile-apps -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="soccer Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+		Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<!-- //for-mobile-apps -->
+	<!-- js -->
+		<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+	<!-- js -->
+</head>
+<body>
+<!-- header -->
+<div class="header">
+	 <div class="container">
+		 <div class="logo">
+			   <h1><a href="index.html">TURF BOOKING</a></h1>
+		 </div>	
+		 <div class="top-menu">
+			 <span class="menu"></span>
+			  <ul>
+				 <li><a href="/">HOME</a></li>
+				 
+				 <!-- <li><a href="/error/">TRAINING</a></li> -->
+			
+				 
+				 <li><a href="/contact/">SIGN IN</a></li>
+				 {% if request.session.id %}
+				 <li><a href="/logout/">LOGOUT</a></li>
+				 {% else %}
+				 <li><a href="/login/">LOGIN</a></li>
+				 {% endif %}
+			 </ul>			 
+		 </div>
+		 <!-- script-for-menu -->
+		 <script>
+				$("span.menu").click(function(){
+					$(".top-menu ul").slideToggle("slow" , function(){
+					});
+				});
+		 </script>
+		 <!-- script-for-menu -->
+		 <div class="clearfix"></div>
+	 </div>
+</div>
+<!-- //header -->
+<!-- banner -->
+<div class="strip">
+	 <div class="container">
+	 <div class="search">
+		    <form>
+		    	<input type="text" value="" placeholder="Search...">
+				<input type="submit" value="">
+			</form>
+     </div>     
+	 <div class="social">			 
+			 <a href="#"><i class="facebook"></i></a>
+			 <a href="#"><i class="twitter"></i></a>
+			 <a href="#"><i class="dribble"></i></a>	
+			 <a href="#"><i class="google"></i></a>	
+			 <a href="#"><i class="youtube"></i></a>	
+	 </div>
+		<div class="clearfix"></div>
+		</div>
+</div>
+<!-- banner -->
+<!-- //header -->
+<div class="container">
+		 <ol class="breadcrumb">
+		  <li><a href="/index/">Home</a></li>
+		  <li class="active">Booking</li>
+		 </ol>
+</div>
+<!-- //header -->
+
+
+
+
+
+
+
+
+
+
+
+<div class="featured-news">
+	 <div class="container">
+		 <div class="ftrd-head text-center">
+			 <h3>TURF BOOKING</h3>
+			 <!-- <p>Phasellus ultricies magna vitae justo aliquam, cursus bibendum neque tempus.</p> -->
+		 </div>
+		 <div class="event-grids">
+
+			 	{% for x in turfdetails %}
+
+
+		 			 <div class="col-md-4 event-grid-sec">
+				 <div class="event-time text-center">
+					 <p>0{{x.tname}}</p>
+				 </div>
+				 <div class="event-grid_pic">
+					 <img src="{{x.image.url}}" alt=""/>
+					 <h3><a href="#">{{x.tname}}</a></h3>
+					 <p>{{x.description}}</p>
+					 <p>{{x.location}}</p>
+					 <p>{{x.mobile}}</p>
+					 <p>{{x.facility}}</p>
+					 <p>{{x.specification}}</p>
+					 <p>Rs.{{x.price}}</p>
+					 
+				<form action="/booking/" method="POST">
+			 	{% csrf_token %}
+			 			<input type="hidden" value="{{x.id}}" name="turfid">
+			 			<label>Time From</label>
+						<input type="time" name="timefrom" placeholder="Time From" required=" "/>
+						<label>Time To</label>
+						<input type="time" name="timeto" placeholder="Time To" required=" "/><br><br>
+						<label>Date</label>
+						<input type="date" name="date" placeholder="Date" required=" "/><br><br>
+						<button type="submit" class="btn btn-info">Submit</button>
+						<!-- <input type="submit" value="SEND"> -->
+			 	</form>
+				 </div>
+
+
+			
+			 </div>
+				{% endfor %}
+
+				 <div class="clearfix"></div>
+		 </div>
+	 </div>
+</div>
+<!---->
+
+
+
+<!-- contact -->
+
+<!--footer-->
+<div class="footer">
+	 <div class="container">
+		 <div class="copywrite">
+			 <p>© 2015 All Rights Reseverd Design by <a href="http://w3layouts.com/">W3layouts</a> </p>
+		 </div>
+		 <div class="footer-menu">
+			 <ul>
+				 <li><a href="/">HOME</a></li>
+				 
+				 <!-- <li><a href="index.html">TRAINING</a></li> -->
+				 
+				 <li><a href="/turf/">TURF</a></li>
+				 <li><a href="/CONTACT/">SIGN IN</a></li>
+				 {% if request.session.id %}
+				 <li><a href="/logout/">LOGOUT</a></li>
+				 {% else %}
+				 <li><a href="/login/">LOGIN</a></li>
+				 {% endif %}
+			 </ul>
+		 </div>
+		 <div class="clearfix"></div>
+	 </div>
+</div>
+<!-- //footer -->
+</body>
+</html>
