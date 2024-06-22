@@ -85,6 +85,11 @@ def logout(request):
 		del request.session['id']
 	return render(request,'index.html')
 
+def adminlogout(request):
+	if request.session.has_key('id'):
+		del request.session['id']
+	return redirect("/adminlogin")
+
 
 def register(request):
 	if request.method=='POST':
