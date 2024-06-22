@@ -109,7 +109,11 @@ def userlist(request):
 	return render(request,'tables.html',{'ulist':ulist})
 
 def adminindex(request):
-	return render(request,'adminindex.html')
+	if request.session.has_key('id'):
+		return render(request,'adminindex.html')
+	else:
+		return redirect("/adminlogin")
+		
 
 
 def turf(request):
