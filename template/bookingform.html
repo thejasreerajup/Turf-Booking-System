@@ -203,18 +203,21 @@ document.addEventListener('DOMContentLoaded', function() {
 						<label>Date</label>
 						<input type="date" name="date" id="date" placeholder="Date" required onchange="checkBooking()"/><br>
 						<p>Booking Status: <span id="status"></span></p><br>
+						<div id="sessionlog">
+
 						<img hidden="true" id="payment-qr">
 						<br>
 						<div hidden="'true" id="paydiv">
-							<!-- TODO: Payment id upload Database -->
 							<label for='payment-id'>Payment Id(Optional): </label>
 							<input name="payment-id" id="payment-id">
 						</div>
 						<br>
 						<br>
-
-
 						<button id="submit-button" disabled="true" type="submit" class="btn btn-info">Submit</button>
+						</div>
+						<div id="sessionSign" hidden="true">
+							<p><a href="/login"><button>Log In</button></a>/<a href="/contact"><button>Sign Up</button></a> to Book Turf</p>
+						</div>
 						<!-- <input type="submit" value="SEND"> -->
 			 	</form>
 				 </div>
