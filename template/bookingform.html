@@ -29,10 +29,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script>
 	// Function to check booking availability
 	function checkBooking() {
+		document.getElementById('date').min = new Date(Date.now() + 86400000).toISOString().split("T")[0];
 		const turfid = document.getElementById('turfid').value;
 		const date = document.getElementById('date').value;
-		const timefrom = parseInt(document.getElementById('timefrom').value);
-		const timeto = parseInt(document.getElementById('timeto').value);
+		const timefrom = document.getElementById('timefrom').value + ":00";
+		const timeto = document.getElementById('timeto').value + ":00";
 		const qrCode = document.getElementById('payment-qr');
 		const payid = document.getElementById('paydiv');
 		const submitButton = document.getElementById('submit-button');
