@@ -153,8 +153,8 @@ def turf_details(request):
 def check_booking(request):
 	tid=int(request.GET['turfid'])
 	date = request.GET.get('date')
-	timefrom = int(request.GET.get('timefrom'))
-	timeto = int(request.GET.get('timeto'))
+	timefrom = request.GET.get('timefrom')
+	timeto = request.GET.get('timeto')
 
 	bookingFrom = booking_tb.objects.filter(
 		turfid=tid,
