@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
+from django.db.models import Q
 from turfapp.models import *
 import qrcode
 
@@ -144,11 +145,35 @@ def check_booking(request):
 		turfid=tid,
 		date=date,
 		timefrom=timefrom,
-		timeto=timeto
 	)
 
-	is_available = not bookings.exists()
-	return JsonResponse({'available': is_available, 'id':tid, 'date':date})
+	bookingTo = booking_tb.objects.filter(
+		turfid=tid,
+		date=date,
+		timeto=timeto,
+	)
+
+	BookingTimeFrame = booking_tb.objects.filter(
+		Q(timefrom__lt=timeto) & Q(timeto__gt=timefrom),
+		turfid=tid,
+		date=date
+	)
+	text = 'Booking Is Available'
+
+	if(BookingTimeFrame.exists()):
+		text = "Booking not available From "+str(timefrom)+" To "+str(timeto)
+		is_available = False
+	elif(bookingFrom.exists()):
+		is_available = False
+		text = "Booking not available From "+str(timefrom)
+	elif(bookingTo.exists()):
+		is_available = False
+		text = "Booking not available To "+str(timeto)
+	else:
+		is_available = True
+		
+
+	return JsonResponse({'available': is_available, 'text':text})
 
 def booking(request):
 	if request.session.has_key('id'):
