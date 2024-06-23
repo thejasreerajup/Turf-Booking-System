@@ -135,12 +135,6 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- banner -->
 <div class="strip">
 	 <div class="container">
-	 <div class="search">
-		    <form>
-		    	<input type="text" value="" placeholder="Search...">
-				<input type="submit" value="">
-			</form>
-     </div>     
 	 <div class="social">			 
 			 <a href="#"><i class="facebook"></i></a>
 			 <a href="#"><i class="twitter"></i></a>
@@ -156,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="container">
 		 <ol class="breadcrumb">
 		  <li><a href="/">Home</a></li>
-		  <li class="active">Booking</li>
+		  <li class="active">Turf Booking</li>
 		 </ol>
 </div>
 <!-- //header -->
@@ -202,6 +196,11 @@ document.addEventListener('DOMContentLoaded', function() {
 						 <p>Price: <span id="price"></span></p>
 						<label>Date</label>
 						<input type="date" name="date" id="date" placeholder="Date" required onchange="checkBooking()"/><br>
+						<label for="category">Sport: </label>
+						{% for item in category %}
+							<input type="radio" name="category" value="{{item}}"> {{item}}
+						{% endfor %}
+						<br>
 						<p>Booking Status: <span id="status"></span></p><br>
 						<div id="sessionlog">
 
