@@ -21,7 +21,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="keywords" content="soccer Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
 		Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		<script type="application/x-javascript">
+			addEventListener("load", function() {
+				setTimeout(hideURLbar, 0); }, false); function hideURLbar(){
+					window.scrollTo(0,1); }
+		</script>
 	<!-- //for-mobile-apps -->
 	<!-- js -->
 		<script src="/static/js/jquery.min.js"></script>
@@ -75,11 +79,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="container">
 		 <ol class="breadcrumb">
 		  <li><a href="/">Home</a></li>
-		  <li class="active">Turf</li>
+		  <li class="active">Turf Booking</li>
 		 </ol>
 </div>
 <div class="ftrd-head text-center">
-			 <h3>TURFS</h3>
+			 <h3>TURF BOOKING</h3>
 </div>
 <div class="banner">
 		<script src="/static/js/responsiveslides.min.js"></script>
@@ -171,11 +175,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="content">
 	 <div class="container">	 	
 		 <div class="content-grids">
+			 <form action="/turf/" method="POST">
+				{% csrf_token %} 
+				<label for="Category">Category: </label>
+				 <select name="Category">
+					 <option value="cricket">Cricket</option>
+					 <option value="football">Football</option>
+				 </select>
+				 <button type="submit">Show</button>
+			 </form>
 		 	{% for x in turfdetails %}
-			 <div class="col-md-4 content-grid1">
+			 <div class="col-md-4 content-grid1" name="turf{{x.id}}">
 			 	<br>
-				 <img src="{{x.image.url}}" alt=""/>
+				 <img style="height: 300px; width: 300px; object-fit: cover;" class="img-thumbnail" src="{{x.image.url}}" alt=""/>
 				 <h3>{{x.tname}}</h3>
+				 {{x.category}}
 				<!--  <p>{{x.description}}</p> -->
 				 <p>{{x.location}}</p>
 				 <a href="/turf_details/?tid={{x.id}}">Read More..</a>
@@ -200,6 +214,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		 </div>		 
 	 </div>
 </div>
+
+{% if request.session.id %}
 <div class="panel-body widget-shadow">
 	<h4>Booking History</h4>
 	<table class="table">
@@ -210,6 +226,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			  <th>User Address</th>
 			  <th>Contact</th>
 			  <th>Turf Name</th>
+				  <th>Category</th>
 			  <th>Time From</th>
 			  <th>Time To</th>
 			  <th>Date</th>
@@ -219,11 +236,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<tbody>
 			{% for x in booking_details %}
 			<tr>
-			  <th scope="row">1</th>
+				  <th scope="row">{{ forloop.counter }}</th>
 			  <td>{{x.userid.name}}</td>
 			  <td>{{x.userid.address}}</td>
 			  <td>{{x.userid.contact}}</td>
 			  <td>{{x.turfid.tname}}</td>
+				  <td>{{x.category}}</td>
 			  <td>{{x.timefrom}}</td>
 			  <td>{{x.timeto}}</td>
 			  <td>{{x.date}}</td>
@@ -235,7 +253,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</tbody>
 	</table>
 </div>
+{% endif %}
+<div class="clearfix">
+	<br>
+	<br>
+	<br>
 <br>
+</div>
 
 
 

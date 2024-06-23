@@ -124,18 +124,31 @@ def adminindex(request):
 def turf(request):
 	if request.session.has_key('id'):
 		uid=request.session['id']
-		turfdetails=turf_tb.objects.all()
+
+		# Filter on Category
+		if request.method == 'POST':
+			cat = request.POST['Category']
+			turfdetails=turf_tb.objects.all().filter(category__icontains = cat)
+		else:
+			turfdetails=turf_tb.objects.all()
+			
 		booking_details=booking_tb.objects.all().filter(userid=uid)
 		return render(request,'turf.html',{'turfdetails':turfdetails,'booking_details':booking_details})
 	else:
-		turfdetails=turf_tb.objects.all()
+		# Filter on Category
+		if request.method == 'POST':
+			cat = request.POST['Category']
+			turfdetails=turf_tb.objects.all().filter(category__icontains = cat)
+		else:
+			turfdetails=turf_tb.objects.all()
 		return render(request,'turf.html',{'turfdetails':turfdetails})
 
 def turf_details(request):
 	tid=request.GET['tid']
 	turfdetails=turf_tb.objects.all().filter(id=tid)
+	category = turfdetails[0].category.split(',')
 	qrcode.make(turfdetails[0].mobile + '@upi').save('static/images/payment_qr.png')
-	return render(request,'bookingform.html',{'turfdetails':turfdetails})
+	return render(request,'bookingform.html',{'turfdetails':turfdetails, 'category':category})
 
 def check_booking(request):
 	tid=int(request.GET['turfid'])
@@ -180,15 +193,16 @@ def check_booking(request):
 def booking(request):
 	if request.session.has_key('id'):
 		if request.method=='POST':
-			timefrom=request.POST['timefrom']
-			timeto=request.POST['timeto']
+			timefrom=request.POST['timefrom']+":00"
+			timeto=request.POST['timeto']+":00"
 			date= request.POST['date']
+			category= request.POST['category']
 			payment_id=request.POST['payment-id']
 			t=request.POST['turfid']
 			u=request.session['id']
 			tid=turf_tb.objects.get(id=t)
 			uid=user_tb.objects.get(id=u)
-			a=booking_tb(userid=uid,turfid=tid,timeto=timeto,timefrom=timefrom,date=date,status='pending', payment_id=payment_id)
+			a=booking_tb(userid=uid,turfid=tid,timeto=timeto,timefrom=timefrom,date=date,status='pending', payment_id=payment_id, category=category)
 			a.save()
 			uid=request.session['id']
 			turfdetails=turf_tb.objects.all()

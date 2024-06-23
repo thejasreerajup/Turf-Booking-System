@@ -27,6 +27,7 @@ class booking_tb(models.Model):
 	timeto=models.CharField(max_length=30,default='')
 	timefrom=models.CharField(max_length=30,default='')
 	date=models.CharField(max_length=30,default='')
+	category=models.CharField(max_length=500,default='')
 	payment_id=models.CharField(max_length=50,default='')
 	status=models.CharField(max_length=30,default='')
 
