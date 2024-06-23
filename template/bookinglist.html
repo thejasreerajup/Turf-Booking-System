@@ -191,6 +191,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								  <th>Time From</th>
 								  <th>Time To</th>
 								  <th>Date</th>
+								  <th>Payment Id</th>
 								  <th>Status</th>
 								</tr>
 							</thead>
@@ -205,7 +206,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								  <td>{{x.timefrom}}</td>
 								  <td>{{x.timeto}}</td>
 								  <td>{{x.date}}</td>
-								  <td><a href="/approved_booking/?tid={{x.id}}"><button class="btn btn-info">Approved</button></a></td>
+									<td>{{x.payment_id}}</td>
+									
+									{% if x.status == "Approved" %}
+										<td><button disabled class="btn btn-info"><a href="/approved_booking/?tid={{x.id}}">Approved</a></button></td>
+									{% else %}
+										<td><a href="/approved_booking/?tid={{x.id}}"><button class="btn btn-info">Approve</button></a></td>
+									{% endif %}
 								</tr>
 								{% endfor %}
 								
