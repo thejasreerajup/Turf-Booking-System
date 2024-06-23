@@ -13,7 +13,9 @@ def gallery(request):
 	return render(request,'gallery.html')
 
 def test(request):
-	return render(request,'test.html')
+	# result_render = render(request,'test.html')
+	result_render = render(request,"codedebugger.html")
+	return result_render
 
 def event(request):
 	return render(request,'event.html')
@@ -141,7 +143,7 @@ def check_booking(request):
 	timefrom = int(request.GET.get('timefrom'))
 	timeto = int(request.GET.get('timeto'))
 
-	bookings = booking_tb.objects.filter(
+	bookingFrom = booking_tb.objects.filter(
 		turfid=tid,
 		date=date,
 		timefrom=timefrom,
@@ -180,12 +182,13 @@ def booking(request):
 		if request.method=='POST':
 			timefrom=request.POST['timefrom']
 			timeto=request.POST['timeto']
-			date=request.POST['date']
+			date= request.POST['date']
+			payment_id=request.POST['payment-id']
 			t=request.POST['turfid']
 			u=request.session['id']
 			tid=turf_tb.objects.get(id=t)
 			uid=user_tb.objects.get(id=u)
-			a=booking_tb(userid=uid,turfid=tid,timeto=timeto,timefrom=timefrom,date=date,status='pending')
+			a=booking_tb(userid=uid,turfid=tid,timeto=timeto,timefrom=timefrom,date=date,status='pending', payment_id=payment_id)
 			a.save()
 			uid=request.session['id']
 			turfdetails=turf_tb.objects.all()
