@@ -310,14 +310,11 @@ Reserved</p>
 			 <ul>
 				 <li><a href="/">HOME</a></li>
 				 <li><a href="/about/">ABOUT US</a></li>
-				 <li><a href="/gallery">GALLERY</a></li>
-				 <!-- <li><a href="index.html">TRAINING</a></li> -->
-				 <li><a href="/event/">NEWS & EVENTS</a></li>
 				 <li><a href="/turf/">TURF</a></li>
-				 <li><a href="/contact/">CONTACT</a></li>
 				 {% if request.session.id %}
 				 <li><a href="/logout/">LOGOUT</a></li>
 				 {% else %}
+				 <li><a href="/contact/">SIGN UP</a></li>
 				 <li><a href="/login/">LOGIN</a></li>
 				 {% endif %}
 			 </ul>
