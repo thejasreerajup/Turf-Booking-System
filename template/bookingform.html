@@ -71,13 +71,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	}
 
 	function updatePrice() {
+		debugger;
 		const startHour = parseInt(document.getElementById('timefrom').value);
-		const endHour = parseInt(document.getElementById('timeto').value);
+		var endHour = parseInt(document.getElementById('timeto').value);
 		const pricePerHour = parseInt(document.getElementById('turf_price').getAttribute("value"));
 
 		// Ensure the end hour is always greater than the start hour
 		if (endHour <= startHour) {
 			document.getElementById('timeto').value = startHour + 1;
+			endHour = parseInt(document.getElementById('timeto').value);
 		}
 
 		const totalHours = endHour - startHour;
@@ -92,7 +94,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 document.addEventListener('DOMContentLoaded', function() {
     updatePrice(); // Set initial booking details
-});
+	}
+);
 </script>
 <body>
 <!-- header -->
