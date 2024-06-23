@@ -47,15 +47,27 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					payid.hidden = false;
 					qrCode.src = "/static/images/payment_qr.png"
 					submitButton.disabled = false;
-					document.getElementById('status').innerText = "The selected time slot is Available.";
+					document.getElementById('status').innerText = data.text;
 				} else {
-					qrcode.getAttribute('src') = ""
+					qrCode.src = ""
 					qrCode.hidden = true;
 					payid.hidden = true;
 					submitButton.disabled = true;
-					document.getElementById('status').innerText = "The selected time slot is Already Booked.";
+					document.getElementById('status').innerText = data.text;
 				}
 			});
+
+		// Hide Payment if Logged In
+		if (!"{{request.session.id}}"){
+			console.log(" User Not Logged In");
+			document.getElementById('sessionlog').hidden = true;
+			document.getElementById('sessionSign').hidden = false;
+		}else{
+			console.log(" User Logged In");
+			// User Logged In
+			document.getElementById('sessionlog').hidden = false;
+			document.getElementById('sessionSign').hidden = true;
+		}
 	}
 
 	function updatePrice() {
