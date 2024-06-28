@@ -79,11 +79,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="container">
 		 <ol class="breadcrumb">
 		  <li><a href="/">Home</a></li>
-		  <li class="active">Turf Booking</li>
+		  <li class="active">TURFS</li>
 		 </ol>
 </div>
 <div class="ftrd-head text-center">
-			 <h3>TURF BOOKING</h3>
+			 <h3>TURFS</h3>
 </div>
 <div class="banner">
 		<script src="/static/js/responsiveslides.min.js"></script>
@@ -179,6 +179,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				{% csrf_token %} 
 				<label for="Category">Category: </label>
 				 <select name="Category">
+					<option value="select">Select</option>
 					 <option value="cricket">Cricket</option>
 					 <option value="football">Football</option>
 				 </select>
@@ -216,49 +217,49 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </div>
 
 {% if request.session.id %}
-<div class="panel-body widget-shadow">
-	<h4>Booking History</h4>
-	<table class="table">
-		<thead>
-			<tr>
-			  <th>Id</th>
-			  <th>User Name</th>
-			  <th>User Address</th>
-			  <th>Contact</th>
-			  <th>Turf Name</th>
+	<div class="panel-body widget-shadow">
+		<h4>Booking History</h4>
+		<table class="table">
+			<thead>
+				<tr>
+				  <th>Id</th>
+				  <th>User Name</th>
+				  <th>User Address</th>
+				  <th>Contact</th>
+				  <th>Turf Name</th>
 				  <th>Category</th>
-			  <th>Time From</th>
-			  <th>Time To</th>
-			  <th>Date</th>
-			  <th>Status</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for x in booking_details %}
-			<tr>
+				  <th>Time From</th>
+				  <th>Time To</th>
+				  <th>Date</th>
+				  <th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for x in booking_details %}
+				<tr>
 				  <th scope="row">{{ forloop.counter }}</th>
-			  <td>{{x.userid.name}}</td>
-			  <td>{{x.userid.address}}</td>
-			  <td>{{x.userid.contact}}</td>
-			  <td>{{x.turfid.tname}}</td>
+				  <td>{{x.userid.name}}</td>
+				  <td>{{x.userid.address}}</td>
+				  <td>{{x.userid.contact}}</td>
+				  <td>{{x.turfid.tname}}</td>
 				  <td>{{x.category}}</td>
-			  <td>{{x.timefrom}}</td>
-			  <td>{{x.timeto}}</td>
-			  <td>{{x.date}}</td>
-			  <td>{{x.status}}</td>
-			</tr>
-			{% endfor %}
-			
-			
-		</tbody>
-	</table>
-</div>
+				  <td>{{x.timefrom}}</td>
+				  <td>{{x.timeto}}</td>
+				  <td>{{x.date}}</td>
+				  <td>{{x.status}}</td>
+				</tr>
+				{% endfor %}
+				
+				
+			</tbody>
+		</table>
+	</div>
 {% endif %}
 <div class="clearfix">
 	<br>
 	<br>
 	<br>
-<br>
+	<br>
 </div>
 
 
@@ -322,8 +323,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="footer">
 	 <div class="container">
 		 <div class="copywrite">
-			 <p>&copy; 2024 Turf Booking System. All Rights 
-Reserved</p>
+			 <p>&copy; 2024 Turf Booking System. All Rights Reserved </p>
+<a href="vscode://file/C:\TurfbookingSystem\template\turf.html">open in code </a>
 		 </div>
 		 <div class="footer-menu">
 			 <ul>

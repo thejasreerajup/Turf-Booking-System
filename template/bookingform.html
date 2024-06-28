@@ -40,6 +40,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	
 		if (!date) return; // Do nothing if date is not selected
 	
+		debugger;
 		fetch(`/check_booking/?turfid=${turfid}&date=${date}&timefrom=${timefrom}&timeto=${timeto}`)
 			.then(response => response.json())
 			.then(data => {
@@ -93,8 +94,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		document.getElementById('price').innerText = totalPrice;
 	}
 
-document.addEventListener('DOMContentLoaded', function() {
-    updatePrice(); // Set initial booking details
+	document.addEventListener('DOMContentLoaded', function() {
+		updatePrice(); // Set initial booking details
 	}
 );
 </script>
@@ -135,14 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- //header -->
 <!-- banner -->
 <div class="strip">
-	 <div class="container">
-	 <div class="social">			 
-			 <a href="#"><i class="facebook"></i></a>
-			 <a href="#"><i class="twitter"></i></a>
-			 <a href="#"><i class="dribble"></i></a>	
-			 <a href="#"><i class="google"></i></a>	
-			 <a href="#"><i class="youtube"></i></a>	
-	 </div>
+	
 		<div class="clearfix"></div>
 		</div>
 </div>
@@ -178,6 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					 <p>{{x.description}}</p>
 					 <p>{{x.location}}</p>
 					 <p>{{x.mobile}}</p>
+					 <p>{{x.email}}</p>
 					 <p>{{x.facility}}</p>
 					 <p>{{x.specification}}</p>
 					 <p>Rs.<span id="turf_price" value="{{x.price}}">{{x.price}}</span></p>
@@ -197,7 +192,8 @@ document.addEventListener('DOMContentLoaded', function() {
 						 <p>Price: <span id="price"></span></p>
 						<label>Date</label>
 						<input type="date" name="date" id="date" placeholder="Date" required onchange="checkBooking()"/><br>
-						<label for="category">Sport: </label>
+						
+						<label for="category">Sports: </label>
 						{% for item in category %}
 							<input type="radio" name="category" value="{{item}}"> {{item}}
 						{% endfor %}
@@ -205,18 +201,19 @@ document.addEventListener('DOMContentLoaded', function() {
 						<p>Booking Status: <span id="status"></span></p><br>
 						<div id="sessionlog">
 
-						<img hidden="true" id="payment-qr">
-						<br>
-						<div hidden="'true" id="paydiv">
-							<label for='payment-id'>Payment Id(Optional): </label>
-							<input name="payment-id" id="payment-id">
-						</div>
-						<br>
-						<br>
-						<button id="submit-button" disabled="true" type="submit" class="btn btn-info">Submit</button>
+							<img hidden="true" id="payment-qr">
+							<br>
+							<div hidden="'true" id="paydiv">
+								<label for='payment-id'>Payment Id(Optional): </label>
+								<input name="payment-id" id="payment-id">
+							</div>
+							<br>
+							<br>
+							<button id="submit-button" disabled="true" type="submit" class="btn btn-info">Submit</button>
 						</div>
 						<div id="sessionSign" hidden="true">
-							<p><a href="/login"><button>Log In</button></a>/<a href="/contact"><button>Sign Up</button></a> to Book Turf</p>
+							<p><a href="/login"><button>LOGIN</button></a>/<a href="/contact"><button>SIGN UP</button></a> to Book Turf</p>
+							All Ready have an account LOGIN / Create an account SIGN UP
 						</div>
 						<!-- <input type="submit" value="SEND"> -->
 			 	</form>
@@ -241,8 +238,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="footer">
 	 <div class="container">
 		 <div class="copywrite">
-			 <p>&copy; 2024 Turf Booking System. All Rights 
-Reserved</p>
+			 <p>&copy; 2024 Turf Booking System. All Rights Reserved </p>
+<a href="vscode://file/C:\TurfbookingSystem\template\bookingform.html">open in code </a>
 		 </div>
 		 <div class="footer-menu">
 			 <ul>
