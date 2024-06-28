@@ -226,3 +226,6 @@ def approved_booking(request):
 	booking_tb.objects.all().filter(id=tid).update(status='Approved')
 	booking_details=booking_tb.objects.all()
 	return render(request,'turf.html',{'booking_details':booking_details})
+def turflist(request):
+  tlist=turf_tb.objects.all()
+  return render(request,'turflist.html',{'tlist':tlist})

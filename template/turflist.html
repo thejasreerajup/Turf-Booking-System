@@ -165,31 +165,37 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<h2 class="title1">Tables</h2>
 					<div class="panel-body widget-shadow">
 						<h4>Basic Table:</h4>
-						<table class="table">
-							<thead>
-								<tr>
-								  <th>#</th>
-								  <th>name</th>
-								  <th>address</th>
-								  <th>email</th>
-								  <th>contact</th>
-								  
-								</tr>
-							</thead>
-							<tbody>
-								{% for x in ulist %}
-								<tr>
-								  <th scope="row">{{ forloop.counter }}</th>
-								  <td>{{x.name}}</td>
-								  <td>{{x.address}}</td>
-								  <td>{{x.email}}</td>
-								  <td>{{x.contact}}</td>
-								</tr>
-								{% endfor %}
-								
-								
-							</tbody>
-						</table>
+                        <table class="table"> 
+                            <thead> 
+                             <tr> 
+                              <th>#</th> 
+                              <th>name</th> 
+                              <th>category</th> 
+                              <th>description</th> 
+                              <th>location</th> 
+                              <th>mobile</th> 
+                              <th>email</th> 
+                              <th>price</th> 
+                              <th>facility</th> 
+                              <th>specification</th> 
+                             </tr> 
+                            </thead> 
+                            <tbody>
+                              {% for x in tlist %} 
+                             <tr> 
+                              <th scope="row">{{ forloop.counter }}</th> 
+                              <td>{{x.tname}}</td> 
+                              <td>{{x.category}}</td> 
+                              <td>{{x.description}}</td> 
+                              <td>{{x.location}}</td> 
+                              <td>{{x.mobile}}</td> 
+                              <td>{{x.email}}</td> 
+                              <td>{{x.price}}</td> 
+                              <td>{{x.facility}}</td> 
+                              <td>{{x.specification}}</td> 
+                             </tr> {% endfor %} 
+                            </tbody> 
+                           </table> 
 					</div>
 					<!-- <div class="bs-example widget-shadow" data-example-id="bordered-table"> 
 						<h4>Bordered Basic Table:</h4>
@@ -257,4 +263,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<script src="/static/js1/bootstrap.js"> </script>
 	
 </body>
-</html>
+</html> 
+  
+  

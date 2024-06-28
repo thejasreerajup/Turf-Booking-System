@@ -72,6 +72,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
            
                 </a>
               </li>
+
+              <li class="treeview">
+                <a href="/turflist/">
+                <i class="fa fa-futbol-o"></i>
+                <span>Turf List</span>
+           
+                </a>
+              </li>
+              
               <li class="treeview">
                 <a href="/userlist/">
                 <i class="fa fa-users"></i>
@@ -86,7 +95,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <span>Booking List</span>
            
                 </a>
-              </li> 
+              </li>
             </ul>
           </div>
           <!-- /.navbar-collapse -->
@@ -175,15 +184,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<tbody>
 								{% for x in booking_details %}
 								<tr>
-								  <th scope="row">{{ forloop.counter }}</th>
-								  <td>{{x.userid.name}}</td>
-								  <td>{{x.userid.address}}</td>
-								  <td>{{x.userid.contact}}</td>
-								  <td>{{x.turfid.tname}}</td>
+									<th scope="row">{{ forloop.counter }}</th>
+									<td>{{x.userid.name}}</td>
+									<td>{{x.userid.address}}</td>
+									<td>{{x.userid.contact}}</td>
+									<td>{{x.turfid.tname}}</td>
 									<td>{{x.category}}</td>
-								  <td>{{x.timefrom}}</td>
-								  <td>{{x.timeto}}</td>
-								  <td>{{x.date}}</td>
+									<td>{{x.timefrom}}</td>
+									<td>{{x.timeto}}</td>
+									<td>{{x.date}}</td>
 									<td>{{x.payment_id}}</td>
 									
 									{% if x.status == "Approved" %}
@@ -219,7 +228,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</div>
 		<!--footer-->
 		<div class="footer">
-		   <p>&copy; 2024 Turf Booking System. All Rights Reserved</p>
+		   <p>&copy; 2024 Turf Booking System. All Rights Reserved </p>
+		   <a href="vscode://file/C:\TurfbookingSystem\template\bookinglist.html">open in code </a>
+
 	   </div>
         <!--//footer-->
 	</div>

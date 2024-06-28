@@ -32,4 +32,5 @@ path('approved_booking/',views.approved_booking),
 
 # Test Pages
 path('test/',views.test),
+path('turflist/',views.turflist)
 ]
