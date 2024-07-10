@@ -7,14 +7,20 @@ import qrcode
 # Create your views here.
 
 def index(request):
+	"""
+	Home Page
+	"""
 	return render(request,'index.html')
 
 def gallery(request):
 	return render(request,'gallery.html')
 
 def test(request):
+	"""
+	Test Function Request
+	"""
 	# result_render = render(request,'test.html')
-	result_render = render(request,"codedebugger.html")
+	result_render = render(request,"test.html")
 	return result_render
 
 def event(request):
@@ -34,8 +40,14 @@ def about(request):
 	return render(request,'about.html')
 
 def adminlogin(request):
-
+	"""
+	Admin Login
+	"""
+	if request.session.has_key('id'):
+		# Redirect if Already Login
+		return redirect("/adminindex/")
 	if request.method=='POST':
+		# On Submitting Form
 		email=request.POST['email']
 		password=request.POST['password']
 		check=admin_tb.objects.all().filter(email=email,password=password)
@@ -51,6 +63,9 @@ def adminlogin(request):
 		return render(request,'adminlogin.html')
 
 def addturf(request):
+	"""
+	Create Turf Request
+	"""
 	if request.method=='POST':
 		tname=request.POST['tname']
 		category=request.POST['category']
@@ -69,6 +84,9 @@ def addturf(request):
 		return render(request,'addturf.html')
 
 def login(request):
+	"""
+	User Login Page with Request Validation
+	"""
 	if request.method=='POST':
 		email=request.POST['email']
 		password=request.POST['password']
@@ -86,6 +104,9 @@ def login(request):
 
 
 def logout(request):
+	"""
+	Route to logout user Delete Session keys
+	"""
 	if request.session.has_key('id'):
 		del request.session['id']
 	return render(request,'index.html')
@@ -97,6 +118,9 @@ def adminlogout(request):
 
 
 def register(request):
+	"""
+	Register New User
+	"""
 	if request.method=='POST':
 		name=request.POST['name']
 		address=request.POST['address']
@@ -118,10 +142,12 @@ def adminindex(request):
 		return render(request,'adminindex.html')
 	else:
 		return redirect("/adminlogin")
-		
 
 
 def turf(request):
+	"""
+	Turf Details To book and booking Request Action
+	"""
 	if request.session.has_key('id'):
 		uid=request.session['id']
 
@@ -151,6 +177,9 @@ def turf_details(request):
 	return render(request,'bookingform.html',{'turfdetails':turfdetails, 'category':category})
 
 def check_booking(request):
+	"""
+	Action Route to ckeck If already booked
+	"""
 	tid=int(request.GET['turfid'])
 	date = request.GET.get('date')
 	timefrom = request.GET.get('timefrom')
@@ -191,18 +220,33 @@ def check_booking(request):
 	return JsonResponse({'available': is_available, 'text':text})
 
 def booking(request):
+	"""
+	Turf Booking Request Action
+	"""
 	if request.session.has_key('id'):
 		if request.method=='POST':
 			timefrom=request.POST['timefrom']+":00"
 			timeto=request.POST['timeto']+":00"
 			date= request.POST['date']
 			category= request.POST['category']
+			ttime= request.POST['ttime']
+			tprice= request.POST['tprice']
 			payment_id=request.POST['payment-id']
 			t=request.POST['turfid']
 			u=request.session['id']
 			tid=turf_tb.objects.get(id=t)
 			uid=user_tb.objects.get(id=u)
-			a=booking_tb(userid=uid,turfid=tid,timeto=timeto,timefrom=timefrom,date=date,status='pending', payment_id=payment_id, category=category)
+			a=booking_tb(
+				userid=uid,
+				turfid=tid,
+				timeto=timeto,
+				timefrom=timefrom,
+				date=date,
+				status='pending',
+				payment_id=payment_id,
+				category=category,
+				ttime=ttime,
+				tprice=tprice)
 			a.save()
 			uid=request.session['id']
 			turfdetails=turf_tb.objects.all()
@@ -226,6 +270,18 @@ def approved_booking(request):
 	booking_tb.objects.all().filter(id=tid).update(status='Approved')
 	booking_details=booking_tb.objects.all()
 	return render(request,'turf.html',{'booking_details':booking_details})
+
+
 def turflist(request):
   tlist=turf_tb.objects.all()
   return render(request,'turflist.html',{'tlist':tlist})
+
+
+def deleteturf(request):
+	"""
+	Delete Turf Action
+	"""
+	tid=request.GET['tid']
+	turf_tb.objects.all().filter(id=tid).delete()
+	return True
+
