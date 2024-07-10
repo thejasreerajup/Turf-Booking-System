@@ -1695,8 +1695,8 @@ form.search-form {
 .login-page h2.title1,.signup-page h2.title1{
     text-align: center;
     padding: 1em;
-    background: #629aa9;
-    border-bottom: 10px solid #4b7884;
+    background: #62a97e;
+    border-bottom: 10px solid #4b8472;
     margin: 0;
 	color: #fff;
     font-size: 1.6em;
@@ -1715,7 +1715,7 @@ form.search-form {
     line-height: 1.8em;
 }
 .login-top  h4  a {
-    color: #e94e02;
+    color: #02ec68;
 }
 .login-top  h4  a:hover{
     color: #555;
@@ -1774,7 +1774,7 @@ form.search-form {
     outline: none;
     cursor: pointer;
     color: #fff;
-    background: #F2B33F;
+    background: #0fc038;
     width: 40%;
     padding: .6em 1em;
     font-size: 1em;
