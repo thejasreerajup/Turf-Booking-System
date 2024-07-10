@@ -12,6 +12,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- Toaster Stylesheet -->
+<link rel="stylesheet" href="/static/css/toaster.css"> 
+
 <!-- Bootstrap Core CSS -->
 <link href="/static/css1/bootstrap.css" rel='stylesheet' type='text/css' />
 
@@ -22,16 +26,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <link href="/static/css1/font-awesome.css" rel="stylesheet"> 
 <!-- //font-awesome icons CSS -->
 
- <!-- side nav css file -->
- <link href='/static/css1/SidebarNav.min.css' media='all' rel='stylesheet' type='text/css'/>
- <!-- side nav css file -->
- 
- <!-- js-->
+<!-- side nav css file -->
+<link href='/static/css1/SidebarNav.min.css' media='all' rel='stylesheet' type='text/css'/>
+<!-- side nav css file -->
+
+<!-- js-->
 <script src="/static/js1/jquery-1.11.1.min.js"></script>
 <script src="/static/js1/modernizr.custom.js"></script>
 
 <!--webfonts-->
-<link href="//fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" > 
+<link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
 <!--//webfonts--> 
 
 <!-- Metis Menu -->
@@ -39,6 +44,39 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script src="/static/js1/custom.js"></script>
 <link href="/static/css1/custom.css" rel="stylesheet">
 <!--//Metis Menu -->
+<script>
+	function approve(id){
+		fetch('/approved_booking/?tid='+id, {
+			method: 'GET', 
+			headers: {
+				'Content-Type': 'application/json',
+				'X-CSRFToken': getCookie('csrftoken'),
+			},
+		})
+
+		let button = document.getElementById(id);
+		button.innerText = "Approved";
+		button.className = "custom-toast danger-toast btn btn-success"
+		button.disabled = true;
+
+	}
+
+	function getCookie(name) {
+		let cookieValue = null;
+		if (document.cookie && document.cookie !== '') {
+			const cookies = document.cookie.split(';');
+			for (let i = 0; i < cookies.length; i++) {
+				const cookie = cookies[i].trim();
+				
+				if (cookie.substring(0, name.length + 1) === (name + '=')) {
+					cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+					break;
+				}
+			}
+		}
+		return cookieValue;
+	}
+</script>
 
 </head> 
 <body class="cbp-spmenu-push">
@@ -162,9 +200,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div id="page-wrapper">
 			<div class="main-page">
 				<div class="tables">
-					<h2 class="title1">Tables</h2>
+					<h2 class="title1">BOOKING LIST</h2>
 					<div class="panel-body widget-shadow">
-						<h4>Basic Table:</h4>
+						
 						<table class="table">
 							<thead>
 								<tr>
@@ -177,8 +215,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								  <th>Time From</th>
 								  <th>Time To</th>
 								  <th>Date</th>
+								  <th>Total Hours</th>
+								  <th>Total Price</th>
 								  <th>Payment Id</th>
 								  <th>Status</th>
+								
 								</tr>
 							</thead>
 							<tbody>
@@ -193,12 +234,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									<td>{{x.timefrom}}</td>
 									<td>{{x.timeto}}</td>
 									<td>{{x.date}}</td>
+				               		<td>{{x.ttime}}</td>
+				 					<td>{{x.tprice}}</td>
 									<td>{{x.payment_id}}</td>
 									
 									{% if x.status == "Approved" %}
-										<td><button disabled class="btn btn-success">Approved</button></td>
+										<td><button disabled type="button" class="custom-toast danger-toast btn btn-success">Approved</button></td>
 									{% else %}
-										<td><a href="/approved_booking/?tid={{x.id}}"><button class="btn btn-info">Approve</button></a></td>
+										<td><button type="button" class="custom-toast success-toast btn btn-info" value="{{x.id}}" onclick="approve(this.value)" id="{{x.id}}">Approve</button></td>
 									{% endif %}
 								</tr>
 								{% endfor %}
@@ -267,6 +310,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!--scrolling js-->
 	<script src="/static/js1/jquery.nicescroll.js"></script>
 	<script src="/static/js1/scripts.js"></script>
+	<!-- <div class="toast-overlay" id="toast-overlay"></div>  -->
+
+	<script src='/static/js/toaster.js' type='text/javascript'></script>
 	<!--//scrolling js-->
 	
 	<!-- Bootstrap Core JavaScript -->

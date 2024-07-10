@@ -40,7 +40,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	
 		if (!date) return; // Do nothing if date is not selected
 	
-		debugger;
+		//debugger;
 		fetch(`/check_booking/?turfid=${turfid}&date=${date}&timefrom=${timefrom}&timeto=${timeto}`)
 			.then(response => response.json())
 			.then(data => {
@@ -73,7 +73,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	}
 
 	function updatePrice() {
-		debugger;
+		//debugger;
 		const startHour = parseInt(document.getElementById('timefrom').value);
 		var endHour = parseInt(document.getElementById('timeto').value);
 		const pricePerHour = parseInt(document.getElementById('turf_price').getAttribute("value"));
@@ -91,7 +91,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		document.getElementById('selected-timefrom').innerText = startHour;
 		document.getElementById('selected-timeto').innerText = endHour;
 		document.getElementById('total-hours').innerText = totalHours;
+		document.getElementById('ttime').value = totalHours;
 		document.getElementById('price').innerText = totalPrice;
+		document.getElementById('tprice').value = totalPrice;
 	}
 
 	document.addEventListener('DOMContentLoaded', function() {
@@ -187,9 +189,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						 <label for="timeto">End Time:</label>
 						 <input type="range" id="timeto" name="timeto" min="1" max="24" value="1" oninput="updatePrice()">
 						 <span id="selected-timeto">1</span>:00<br>
-				 
+						 
 						 <p>Total Hours: <span id="total-hours">1</span></p>
+						 <input type="text" id="ttime" hidden="true" name="ttime">
 						 <p>Price: <span id="price"></span></p>
+						 <input type="text" id="tprice" hidden="true" name="tprice">
 						<label>Date</label>
 						<input type="date" name="date" id="date" placeholder="Date" required onchange="checkBooking()"/><br>
 						
@@ -204,19 +208,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<img hidden="true" id="payment-qr">
 							<br>
 							<div hidden="'true" id="paydiv">
-								<label for='payment-id'>Payment Id(Optional): </label>
+								<label for='payment-id'>Payment Id </label>
 								<input name="payment-id" id="payment-id">
 							</div>
 							<br>
 							<br>
 							<button id="submit-button" disabled="true" type="submit" class="btn btn-info">Submit</button>
 						</div>
+					</form>
 						<div id="sessionSign" hidden="true">
-							<p><a href="/login"><button>LOGIN</button></a>/<a href="/contact"><button>SIGN UP</button></a> to Book Turf</p>
+							<p>
+								<a href="/login"><button>LOGIN</button></a>
+								<a href="/contact"><button>SIGN UP</button></a> to Book Turf</p>
 							All Ready have an account LOGIN / Create an account SIGN UP
 						</div>
 						<!-- <input type="submit" value="SEND"> -->
-			 	</form>
 				 </div>
 
 
